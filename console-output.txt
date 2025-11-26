@@ -1,0 +1,662 @@
+Started by user Chaitya Shah
+Obtained Jenkinsfile from git https://github.com/CShah44/todo-app-imt2023055
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential docker-credentials
+Cloning the remote Git repository
+Cloning repository https://github.com/CShah44/todo-app-imt2023055
+ > git.exe init C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app # timeout=10
+Fetching upstream changes from https://github.com/CShah44/todo-app-imt2023055
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.45.2.windows.1'
+using GIT_ASKPASS to set credentials Docker Hub Creds
+ > git.exe fetch --tags --force --progress -- https://github.com/CShah44/todo-app-imt2023055 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe config remote.origin.url https://github.com/CShah44/todo-app-imt2023055 # timeout=10
+ > git.exe config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 3b93ae23f3a4ca0a275b70bf634b748ef3304f39 (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 3b93ae23f3a4ca0a275b70bf634b748ef3304f39 # timeout=10
+Commit message: "jenkins update"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of %DOCKERHUB_CREDENTIALS% or %DOCKERHUB_CREDENTIALS_PSW%
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build & Install Dependencies)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Installing dependencies...
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>pip install -r todo-app/requirements.txt 
+WARNING: Ignoring invalid distribution ~ (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~-p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~=p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~ip (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~~p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~ (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~-p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~=p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~ip (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~~p (C:\Python312\Lib\site-packages)
+Collecting pytest>=7.4.0 (from -r todo-app/requirements.txt (line 11))
+  Downloading pytest-9.0.1-py3-none-any.whl.metadata (7.6 kB)
+Requirement already satisfied: colorama>=0.4 in c:\python312\lib\site-packages (from pytest>=7.4.0->-r todo-app/requirements.txt (line 11)) (0.4.6)
+Collecting iniconfig>=1.0.1 (from pytest>=7.4.0->-r todo-app/requirements.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: packaging>=22 in c:\python312\lib\site-packages (from pytest>=7.4.0->-r todo-app/requirements.txt (line 11)) (24.2)
+Collecting pluggy<2,>=1.5 (from pytest>=7.4.0->-r todo-app/requirements.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest>=7.4.0->-r todo-app/requirements.txt (line 11))
+  Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+Downloading pytest-9.0.1-py3-none-any.whl (373 kB)
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+   ---------------------------------------- 1.2/1.2 MB 6.8 MB/s eta 0:00:00
+WARNING: Ignoring invalid distribution ~ (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~-p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~=p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~ip (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~~p (C:\Python312\Lib\site-packages)
+Installing collected packages: pygments, pluggy, iniconfig, pytest
+WARNING: Ignoring invalid distribution ~ (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~-p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~=p (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~ip (C:\Python312\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~~p (C:\Python312\Lib\site-packages)
+Successfully installed iniconfig-2.3.0 pluggy-1.6.0 pygments-2.19.2 pytest-9.0.1
+
+[notice] A new release of pip is available: 24.0 -> 25.3
+[notice] To update, run: python.exe -m pip install --upgrade pip
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Running tests...
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>set PYTHONPATH=C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app\todo-app   && python -m pytest todo-app/tests 
+============================= test session starts =============================
+platform win32 -- Python 3.12.4, pytest-9.0.1, pluggy-1.6.0
+rootdir: C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app
+plugins: anyio-3.7.1
+collected 14 items
+
+todo-app\tests\test_todo.py ..............                               [100%]
+
+============================= 14 passed in 0.06s ==============================
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Building Docker image...
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>docker build -t greatwarrior44/imt2023055-todo-app:build-1 ./todo-app 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 519B done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.9-slim
+#2 DONE 3.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#4 resolve docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b 0.0s done
+#4 ...
+
+#5 [internal] load build context
+#5 transferring context: 21.39kB 0.0s done
+#5 DONE 0.1s
+
+#4 [1/5] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#4 sha256:ea56f685404adf81680322f152d2cfec62115b30dda481c2c450078315beb508 0B / 251B 0.2s
+#4 sha256:b3ec39b36ae8c03a3e09854de4ec4aa08381dfed84a9daa075048c2e3df3881d 0B / 1.29MB 0.2s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 0B / 13.88MB 0.2s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 0B / 29.78MB 0.2s
+#4 sha256:ea56f685404adf81680322f152d2cfec62115b30dda481c2c450078315beb508 251B / 251B 0.6s done
+#4 sha256:b3ec39b36ae8c03a3e09854de4ec4aa08381dfed84a9daa075048c2e3df3881d 1.05MB / 1.29MB 1.4s
+#4 sha256:b3ec39b36ae8c03a3e09854de4ec4aa08381dfed84a9daa075048c2e3df3881d 1.29MB / 1.29MB 1.4s done
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 1.05MB / 13.88MB 2.3s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 2.10MB / 29.78MB 2.1s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 1.05MB / 13.88MB 7.3s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 4.19MB / 29.78MB 7.2s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 2.10MB / 13.88MB 7.5s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 6.29MB / 29.78MB 7.9s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 3.15MB / 13.88MB 8.5s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 8.39MB / 29.78MB 8.7s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 4.19MB / 13.88MB 9.3s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 10.49MB / 29.78MB 9.3s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 5.24MB / 13.88MB 10.0s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 12.58MB / 29.78MB 9.9s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 14.68MB / 29.78MB 10.5s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 6.29MB / 13.88MB 10.9s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 16.78MB / 29.78MB 11.2s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 7.34MB / 13.88MB 11.8s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 18.87MB / 29.78MB 11.8s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 8.39MB / 13.88MB 12.4s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 20.97MB / 29.78MB 12.4s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 9.44MB / 13.88MB 12.7s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 23.07MB / 29.78MB 12.7s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 10.49MB / 13.88MB 13.2s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 11.53MB / 13.88MB 13.3s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 25.17MB / 29.78MB 13.2s
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 12.58MB / 13.88MB 13.6s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 27.26MB / 29.78MB 13.5s
+#4 sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 29.78MB / 29.78MB 13.8s done
+#4 sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 13.88MB / 13.88MB 13.9s done
+#4 extracting sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d
+#4 extracting sha256:38513bd7256313495cdd83b3b0915a633cfa475dc2a07072ab2c8d191020ca5d 0.7s done
+#4 DONE 14.8s
+
+#4 [1/5] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#4 extracting sha256:b3ec39b36ae8c03a3e09854de4ec4aa08381dfed84a9daa075048c2e3df3881d 0.1s done
+#4 extracting sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08
+#4 extracting sha256:fc74430849022d13b0d44b8969a953f842f59c6e9d1a0c2c83d710affa286c08 0.4s done
+#4 DONE 15.2s
+
+#4 [1/5] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#4 extracting sha256:ea56f685404adf81680322f152d2cfec62115b30dda481c2c450078315beb508 0.0s done
+#4 DONE 15.3s
+
+#6 [2/5] WORKDIR /app
+#6 DONE 0.1s
+
+#7 [3/5] COPY todo.py /app/
+#7 DONE 0.1s
+
+#8 [4/5] COPY tests/ /app/tests/
+#8 DONE 0.1s
+
+#9 [5/5] RUN useradd -m -u 1000 todouser &&     chown -R todouser:todouser /app
+#9 DONE 0.5s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.3s done
+#10 exporting manifest sha256:f755f5d05ca10b2877afe4dc140ac91ad6f7d9c2d29769467abb09602d5b4eac 0.0s done
+#10 exporting config sha256:59b43c29f0389b6bc78f19606c0c31e711cadd3cb95b31fcd252e57200aab8b8 0.0s done
+#10 exporting attestation manifest sha256:3f5c26b2df0348347ce5578ad6d09a8442ca867585e596060a2c37dd63f6ad5a 0.0s done
+#10 exporting manifest list sha256:e548307f8c225b8e75f557564d827ed7dad819bcdef8a020f845c5ba16c4f84d 0.0s done
+#10 naming to docker.io/greatwarrior44/imt2023055-todo-app:build-1
+#10 naming to docker.io/greatwarrior44/imt2023055-todo-app:build-1 done
+#10 unpacking to docker.io/greatwarrior44/imt2023055-todo-app:build-1 0.1s done
+#10 DONE 0.5s
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>docker tag greatwarrior44/imt2023055-todo-app:build-1 greatwarrior44/imt2023055-todo-app:latest 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Docker Hub)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Pushing to Docker Hub...
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>echo ****   | docker login -u greatwarrior44 --password-stdin 
+Login Succeeded
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>docker push greatwarrior44/imt2023055-todo-app:build-1 
+The push refers to repository [docker.io/greatwarrior44/imt2023055-todo-app]
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+b3ec39b36ae8: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+fc7443084902: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+813c1d0170b9: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Waiting
+35f01659f2a2: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+35f01659f2a2: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+35f01659f2a2: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+35f01659f2a2: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+35f01659f2a2: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+a33cba23c668: Waiting
+a07f51d94af1: Waiting
+35f01659f2a2: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+a07f51d94af1: Waiting
+35f01659f2a2: Waiting
+38513bd72563: Waiting
+813c1d0170b9: Waiting
+a07f51d94af1: Waiting
+38513bd72563: Waiting
+a07f51d94af1: Waiting
+e0ad5af44c98: Pushed
+ea56f685404a: Pushed
+38513bd72563: Waiting
+a07f51d94af1: Waiting
+38513bd72563: Waiting
+38513bd72563: Waiting
+38513bd72563: Waiting
+38513bd72563: Waiting
+38513bd72563: Waiting
+a33cba23c668: Pushed
+38513bd72563: Waiting
+813c1d0170b9: Pushed
+a07f51d94af1: Pushed
+35f01659f2a2: Pushed
+b3ec39b36ae8: Pushed
+fc7443084902: Pushed
+38513bd72563: Pushed
+build-1: digest: sha256:e548307f8c225b8e75f557564d827ed7dad819bcdef8a020f845c5ba16c4f84d size: 856
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>docker push greatwarrior44/imt2023055-todo-app:latest 
+The push refers to repository [docker.io/greatwarrior44/imt2023055-todo-app]
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+e0ad5af44c98: Already exists
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Waiting
+38513bd72563: Waiting
+a33cba23c668: Waiting
+38513bd72563: Layer already exists
+a33cba23c668: Waiting
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+ea56f685404a: Layer already exists
+813c1d0170b9: Waiting
+fc7443084902: Waiting
+b3ec39b36ae8: Waiting
+35f01659f2a2: Waiting
+a07f51d94af1: Waiting
+a33cba23c668: Waiting
+a33cba23c668: Layer already exists
+813c1d0170b9: Layer already exists
+fc7443084902: Layer already exists
+b3ec39b36ae8: Layer already exists
+35f01659f2a2: Layer already exists
+a07f51d94af1: Layer already exists
+latest: digest: sha256:e548307f8c225b8e75f557564d827ed7dad819bcdef8a020f845c5ba16c4f84d size: 856
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Cleaning up...
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\imt2023055-todo-app>docker logout 
+Removing login credentials for https://index.docker.io/v1/
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
