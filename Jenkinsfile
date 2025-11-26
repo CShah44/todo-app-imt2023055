@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // REPLACE 'dockerhub-credentials-id' with the ID you gave your credentials in Jenkins
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id') 
+        DOCKERHUB_CREDENTIALS = credentials('docker-credentials') 
         
         // REPLACE 'YOUR_ROLL_NUMBER' with your Docker Hub username/roll number
         DOCKER_IMAGE = 'greatwarrior44/imt2023055-todo-app' 
